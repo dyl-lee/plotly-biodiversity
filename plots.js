@@ -38,37 +38,37 @@
 // init();
 
 function init() {
-    var selector = d3.select("#selDataset");                                // select and store dropdown menu in var selector
+    var selector = d3.select("#selDataset");                                        // select and store dropdown menu in var selector
 
-    d3.json("samples.json").then((data) => {                                // load JSON then do the following function:
-        console.log(data);                                                  // print-check if data loaded ok
-        var sampleNames = data.names;                                       // dot notation to access and store sample names in var (numbers from 940 to 1601)
-        sampleNames.forEach((sample) => {                                   // apply anon function to sampleNames array. for each sample/number...
-            selector                                                        // ...selector (aka dropdown menu) will have...
-                .append("option")                                           // a menu option appended
-                .text(sample)                                               // where the text for this new option = sample that forEach is currently on
-                .property("value", sample);                                 // and has "value" property equal to the sample name that forEach is currently on
+    d3.json("samples.json").then((data) => {                                        // load JSON then do the following function:
+        console.log(data);                                                          // print-check if data loaded ok
+        var sampleNames = data.names;                                               // dot notation to access and store sample names in var (numbers from 940 to 1601)
+        sampleNames.forEach((sample) => {                                           // apply anon function to sampleNames array. for each sample/number...
+            selector                                                                // ...selector (aka dropdown menu) will have...
+                .append("option")                                                   // a menu option appended
+                .text(sample)                                                       // where the text for this new option = sample that forEach is currently on
+                .property("value", sample);                                         // and has "value" property equal to the sample name that forEach is currently on
     });
 })};
 
 init();
 
-function optionChanged(newSample) {                                         // function only called when index.html <select /> detects change and passes this.value to the optionChanged function (aka newSample)
-    buildMetadata(newSample);                                               // separating the functions we need to occur per change keeps the code modular
+function optionChanged(newSample) {                                                 // function only called when index.html <select /> detects change and passes this.value to the optionChanged function (aka newSample)
+    buildMetadata(newSample);                                                       // separating the functions we need to occur per change keeps the code modular
     // buildCharts(newSample);
 };
 
 function buildMetadata(sample) {
     d3.json("samples.json").then((data) => {
         var metadata = data.metadata
-        var resultArray = metadata.filter(sampleObj => sampleObj.id == sample); // remember .filter() returns its result (the object whose id matches the sample selected from dropdown and passed to optionChanged) as an array 
+        var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);     // remember .filter() returns its result (the object whose id matches the sample selected from dropdown and passed to optionChanged) as an array 
         console.log(resultArray);                                               
-        var result = resultArray[0];                                            // use zero-index to access array and store object in var result
+        var result = resultArray[0];                                                // use zero-index to access array and store object in var result
         console.log(result);
-        var PANEL = d3.select("#sample-metadata");                              // select div with demographic info panel and store as var PANEL
+        var PANEL = d3.select("#sample-metadata");                                  // select div with demographic info panel and store as var PANEL
 
-        PANEL.html("");                                                         // clear anything that was here
-        Object.entries(result).forEach(([key, value]) => {                      // generate array of keys and values, then iterate through it. borrowing code from line 46-50 to automate filling out PANEL per KVP 
+        PANEL.html("");                                                             // clear anything that was here
+        Object.entries(result).forEach(([key, value]) => {                          // generate array of keys and values, then iterate through it. borrowing code from line 46-50 to automate filling out PANEL per KVP 
             PANEL
                 .append("h6")
                 .text(key.toUpperCase()+": "+value)  
