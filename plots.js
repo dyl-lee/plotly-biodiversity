@@ -65,9 +65,14 @@ function buildMetadata(sample) {
         console.log(resultArray);                                               
         var result = resultArray[0];                                            // use zero-index to access array and store object in var result
         console.log(result);
-        var PANEL = d3.select("#sample-metadata");
+        var PANEL = d3.select("#sample-metadata");                              // select div with demographic info panel and store as var PANEL
 
-        PANEL.html("");
-        PANEL.append("h6").text(result.location);
+        PANEL.html("");                                                         // clear anything that was here
+        Object.entries(result).forEach(([key, value]) => {                      // generate array of keys and values, then iterate through it. borrowing code from line 46-50 to automate filling out PANEL per KVP 
+            PANEL
+                .append("h6")
+                .text(key.toUpperCase()+": "+value)  
+        });
+                                     
     });
-}
+};
