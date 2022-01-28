@@ -37,6 +37,7 @@ function buildMetadata(sample) {
     // Filter the data for the object with the desired sample number
     var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
     var result = resultArray[0];
+    console.log(result);
     // Use d3 to select the panel with id of `#sample-metadata`
     var PANEL = d3.select("#sample-metadata");
 
@@ -102,7 +103,8 @@ function buildCharts(sample) {
       mode: 'markers',
       marker:{
         size: sample_values,
-        color: otu_ids
+        color: otu_ids,
+        colorscale: 'YlOrRd'
       },
       text: otu_labels,
     }];
@@ -115,5 +117,21 @@ function buildCharts(sample) {
 
     // 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+    
+    // // washing frequency
+    // let washFreq = parseFloat(result);
+
+    // // 4. Create the trace for the gauge chart.
+    // var gaugeData = [{
+    //   domain:
+    // }];
+    
+    // // 5. Create the layout for the gauge chart.
+    // var gaugeLayout = { 
+     
+    // };
+
+    // // 6. Use Plotly to plot the gauge data and layout.
+    // Plotly.newPlot();
   });
 };
