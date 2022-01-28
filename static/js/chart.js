@@ -118,20 +118,37 @@ function buildCharts(sample) {
     // 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);
     
-    // // washing frequency
-    // let washFreq = parseFloat(result);
+    // washing frequency
+    let washFreq = parseFloat(result.wfreq);
 
-    // // 4. Create the trace for the gauge chart.
-    // var gaugeData = [{
-    //   domain:
-    // }];
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [{
+      domain: { x: [0, 1], y: [0, 1] },
+      value: washFreq,
+      title: {text: "Handwashing Frequency"},
+      type: 'indicator',
+      mode: 'gauge+number',
+      gauge: {
+        axis: { range: [null, 10]},
+        bar: { color: 'rgb(119,171,89)'},
+        steps: [
+          {range: [0,2], color: 'rgb(1,31,75)'},
+          {range: [2,4], color: 'rgb(3,57,108)'},
+          {range: [4,6], color: 'rgb(0,91,150)'},
+          {range: [6,8], color: '(100,151,177)'},
+          {range: [8,10], color: '(179,205,224)'}
+        ]
+      }
+    }];
     
-    // // 5. Create the layout for the gauge chart.
-    // var gaugeLayout = { 
-     
-    // };
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout = { 
+      width: 600,
+      height: 450,
+      margin: { t:0, b:0 }
+    };
 
-    // // 6. Use Plotly to plot the gauge data and layout.
-    // Plotly.newPlot();
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
   });
 };
