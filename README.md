@@ -6,8 +6,9 @@ Dashboard visualizing the demographic information of 152 volunteers and their be
 ## Customizations
 * Demographic info panel
   * Converted all keys to uppercase for readability
-* Jumbotron added image from the CDC from [Unsplash](https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-  * Added more detail to the summary line below the <h1 /> jumbotron title
+* Jumbotron 
+  * Added image from the CDC from [Unsplash](https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  * Added more detail to the summary line below the jumbotron title
 * Bubble chart 
   * Customized colorscale (YlGnBu)
   * Changed background color to rgb(245,245,245) for greater contrast
