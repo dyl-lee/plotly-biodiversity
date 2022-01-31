@@ -103,15 +103,25 @@ function buildCharts(sample) {
     }];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: 'Top 10 Bacteria Cultures Found',
+      title: {
+        text: 'Top 10 Bacteria Cultures Found',
+        font: {
+          family:'Helvetica Neue, Helvetica, Arial, sans-serif',
+          size: 22,
+        }
+    },
       xaxis: {title: "Sample Frequency"},
       yaxis: {title: "OTU ID number"},
       font: {
         family: 'Helvetica Neue, Helvetica, Arial, sans-serif'
-      }
+      },
+      plot_bgcolor:"rgb(245,245,245)"
     };
+    // responsive chart
+    var config = {responsive: true};
+
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot('bar', barData, barLayout);
+    Plotly.newPlot('bar', barData, barLayout, config);
     
     // Bar and Bubble charts
     // 1. Create the trace for the bubble chart.
@@ -122,7 +132,8 @@ function buildCharts(sample) {
       marker:{
         size: sample_values,
         color: otu_ids,
-        colorscale: 'YlGnBu'
+        colorscale: 'YlGnBu',
+        line: {width: 1.5, color: "gray"}
       },
       text: otu_labels,
     }];
@@ -131,14 +142,22 @@ function buildCharts(sample) {
     var bubbleLayout = {
       title: 'Bacteria Cultures per Sample',
       xaxis: {title: 'OTU ID'},
+      yaxis: {automargin: true},
       height: 500,
+      // margin: {t: 25},
       font: {
-        family: 'Helvetica Neue, Helvetica, Arial, sans-serif'
-      }
+        family: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+        size: 16,
+      },
+      hovermode: 'closest',
+      plot_bgcolor:"rgb(245,245,245)"
     };
 
+    // responsive chart
+    var config = {responsive: true}; 
+
     // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout, config);
     
     // washing frequency
     var washfreqFloat = parseFloat(washFreq);
@@ -151,10 +170,10 @@ function buildCharts(sample) {
       type: 'indicator',
       mode: 'gauge+number',
       gauge: {
-        axis: { range: [null, 10], tickwidth:1, tickcolor:"black"},
+        axis: { range: [null, 10], tickwidth:2, tickcolor:"black"},
         bar: { 
           color: 'rgb(119,171,89)',
-          thickness: 0.3
+          thickness: 0.3,
         },
         steps: [
           {range: [0,2], color: 'rgb(1,31,75)'},
@@ -162,19 +181,23 @@ function buildCharts(sample) {
           {range: [4,6], color: 'rgb(0,91,150)'},
           {range: [6,8], color: 'rgb(100,151,177)'},
           {range: [8,10], color: 'rgb(179,205,224)'}
-        ]
+        ],
+        bordercolor: "rgb(245,245,245)",
+        borderwidth: 1.5
       }
     }];
     
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = { 
-      width: 400,
-      height: 400,
-      margin: { t: 0, r: 25, l: 25, b: 25 },
-      font: {color: "black", family:'Helvetica Neue, Helvetica, Arial, sans-serif', size: 12}
+      // width: 457.5,
+      // height: 450,
+      margin: {l: 25, r: 25, t: 25, b:25},
+      font: {color: "black", family:'Helvetica Neue, Helvetica, Arial, sans-serif'}
     };
+    // responsive chart
+    var config = {responsive: true};
 
     // 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout, config);
   });
 };

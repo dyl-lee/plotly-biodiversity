@@ -1,0 +1,6 @@
+.jumbotron {
+    /* Photo by <a href="https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">CDC</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
+  background-image: url("../images/cdc-unsplash.jpg");
+  background-size: 100%;
+  background-position: 0% 20%;
+}
